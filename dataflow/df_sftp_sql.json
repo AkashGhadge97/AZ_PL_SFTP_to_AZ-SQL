@@ -1,0 +1,64 @@
+{
+	"name": "df_sftp_sql",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_sftp_student_data",
+						"type": "DatasetReference"
+					},
+					"name": "SFTPServer"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_azure_sql",
+						"type": "DatasetReference"
+					},
+					"name": "AzureSQLDB"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          StudentId as string,",
+				"          First_Name as string,",
+				"          Last_Name as string,",
+				"          Email as string,",
+				"          Phone as string,",
+				"          Country as string,",
+				"          Course as string,",
+				"          Course_Code as string,",
+				"          Active as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> SFTPServer",
+				"SFTPServer sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          StudentId as string,",
+				"          First_Name as string,",
+				"          Last_Name as string,",
+				"          Email as string,",
+				"          Phone as string,",
+				"          Country as string,",
+				"          Course as string,",
+				"          Course_Code as string,",
+				"          Active as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> AzureSQLDB"
+			]
+		}
+	}
+}

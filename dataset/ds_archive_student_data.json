@@ -1,0 +1,22 @@
+{
+	"name": "ds_archive_student_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sftp_student_data",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"folderPath": "/client-sftp/Archive"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
