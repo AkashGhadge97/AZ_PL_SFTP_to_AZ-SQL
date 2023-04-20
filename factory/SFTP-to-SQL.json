@@ -1,0 +1,9 @@
+{
+	"name": "SFTP-to-SQL",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "52bdbbd4-01c8-4bc2-9617-e55e77a6a818",
+		"tenantId": "91474e8d-24c5-4de5-b96e-0c9437779b60"
+	}
+}
